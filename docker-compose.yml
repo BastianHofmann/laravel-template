@@ -1,0 +1,20 @@
+version: '2'
+services:
+  app:
+    build:
+      context: ./docker/app
+    image: laravel-template
+    volumes:
+      - "$PWD:/var/www"
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    env_file: .env
+  db:
+    image: mysql:5
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
